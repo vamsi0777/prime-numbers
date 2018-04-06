@@ -1,0 +1,31 @@
+#include<stdio.h>
+#include<pthread.h>
+void *prime(int a)
+{
+    int flag=0;
+    int i;
+    int j;
+    for(i=2;i<=a;i++)
+    {
+        for(j=2;j<=i/2;j++)
+        {
+          if(i%j==0)
+          {
+              flag=1;
+          }
+        }
+        if(flag==1)
+        {
+            printf("\n%d",i);
+        }
+    }
+}
+void main()
+{
+    pthread_t t1;
+    int n;
+    printf("\n enter any number\n");
+    scanf("%d",&n);
+    pthread_create(&t1,NULL,prime,&n);
+    pthread_join(t1,NULL);
+}
